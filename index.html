@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <title>app</title>
+    <script src="js/angular.js"></script>
+    <style>
+        * { padding:0;margin:0 }
+        a { text-decoration: none }
+        .footer { position: fixed;bottom: 0;left:0;height:64px;text-align: center;width:100%;border-top: 1px solid #eee;background: #eee ;color:#ccc;}
+        .con { width:33.33%;float:left }
+        .footer img {width:35px;margin: 13px 0 0 25px;float:left}
+        .footer p  {float:left;line-height: 64px;}
+        .green { color:green;background: lightgreen; }
+        .header { text-align: center;height:50px;line-height: 50px;border-bottom: 1px solid #ccc;background: green;color:#fff; }
+
+        .tips { height:30px;line-height: 30px;padding:5px 10px;border-bottom: 1px solid #ccc; }
+        .tips p { float:left;font-size: 14px; }
+        .tips .right { float:right;border:1px solid #ccc;padding:0 10px;border-radius: 15px;background: #f5f5f5;color:#5cb85c }
+
+        .container{ display:flex;border-bottom:1px solid #ccc;}
+        .aside{width:80px; height:80px;text-align: center;font-size: 16px;color:#5cb85c }
+        .article{height:60px;flex-grow:1;padding:10px 0 ;}
+        .article p { font-size: 14px;color:#ccc }
+        .article span { font-size: 12px;color:#e7e7e7 }
+        .aside img { width:65px;height:65px;margin-top: 7.5px; }
+        .aside p { margin-top: 15px; }
+        .copy { padding:35px 0 ;text-align: center;font-size: 12px; color:#ccc}
+        .copy a { color:#ccc }
+
+
+        .ac1  { background:#ccc }
+    </style>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl" class="body">
+    <div class="header">
+        <h2>二手车交易市场</h2>
+    </div>
+    <div class="page" ng-show="selected==0">
+        <div class="tips">
+            <p>10秒钟定制职位</p>
+            <div class="right">去登录</div>
+        </div>
+
+        <div class="container" ng-repeat="item in arr" ng-click="fn($index)" >
+            <div class="aside">
+                <img ng-src="{{item.img}}" alt="">
+            </div>
+            <div class="article" >
+                <h3>{{item.name}}</h3>
+                <p>{{item.comp}}</p>
+                <span>最近更新: {{item.time}}</span>
+            </div>
+            <div class="aside" ng-show="item.bol==true"><p>定价: <br>{{item.price}}万</p></div>
+            <div class="aside" ng-show="item.bol==false"><p>预定<br>{{item.num}}辆</p></div>
+        </div>
+        <div style="text-align: center;padding:10px;background: #ccc">淘更多</div>
+        <div class="copy">
+            <p>©2015 lagou.com, all right reserved </p>
+            <a href="#">回到顶部</a>
+        </div>
+        <div style="height:64px;clear: both"></div>  <!--  防止底部重叠 -->
+    </div>
+    <div class="page" ng-show="selected==1">
+
+        <div class="container" ng-repeat="item in arr" ng-click="fn($index)" >
+            <div class="aside">
+                <img ng-src="{{item.img}}" alt="">
+            </div>
+            <div class="article" >
+                <h3>{{item.name}}</h3>
+                <p>{{item.comp}}</p>
+                <span>最近更新: {{item.time}}</span>
+            </div>
+            <div class="aside" ng-show="item.bol==true"><p>定价: <br>{{item.price}}万</p></div>
+            <div class="aside" ng-show="item.bol==false"><p>预定<br>{{item.num}}辆</p></div>
+        </div>
+
+
+
+
+        <div style="height:64px;clear: both"></div>  <!--  防止底部重叠 -->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="page" ng-show="selected==2">
+
+3
+
+
+        <div style="height:64px;clear: both"></div>  <!--  防止底部重叠 -->
+    </div>
+    <div class="footer">
+        <div class="con" ng-click="choose(0)" ng-class="{green:selected==0}">
+            <img src="images/1.png" ng-show="selected!=0">
+            <img src="images/2.png" ng-show="selected==0">
+            <p>报价</p>
+        </div>
+        <div class="con" ng-click="choose(1)" ng-class="{green:selected==1}">
+            <img src="images/3.png" ng-show="selected!=1">
+            <img src="images/4.png" ng-show="selected==1">
+            <p>谈价</p>
+        </div>
+        <div class="con" ng-click="choose(2)" ng-class="{green:selected==2}">
+            <img src="images/9.png" ng-show="selected!=2">
+            <img src="images/10.png" ng-show="selected==2">
+            <p>我的</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function($scope){
+        $scope.selected=0;
+        /*底部切换*/
+        $scope.choose=function (i) {
+            $scope.selected=i;   // i= 0 1 2 3  底部切换
+        };
+        $scope.arr2=[];
+        $scope.arr =[
+            {name:'途安',comp:'上海大众',time:'2017-07-07',price:'15',img:"images/11.jpg",bol:true,num:1},
+            {name:'超级维特拉',comp:'铃木',time:'2017-07-07',price:'18',img:"images/12.jpg",bol:true,num:1},
+            {name:'458',comp:'法拉利',time:'2017-07-07',price:'299',img:"images/13.jpg",bol:true,num:1},
+            {name:'幻影',comp:'劳斯莱斯',time:'2017-07-07',price:'678',img:"images/14.jpg",bol:true,num:1},
+            {name:'英朗',comp:'别克',time:'2017-07-07',price:'6',img:"images/15.jpg",bol:true,num:1},
+            {name:'BRZ',comp:'斯巴鲁',time:'2017-07-07',price:'16',img:"images/16.jpg",bol:true,num:1},
+            {name:'Huracan',comp:'兰博基尼',time:'2017-07-07',price:'299',img:"images/17.jpg",bol:true,num:1},
+            {name:'911',comp:'保时捷',time:'2017-07-07',price:'98',img:"images/18.jpg",bol:true,num:1}
+        ];
+        $scope.fn=function (index) {
+
+
+            $scope.arr[index].bol=!$scope.arr[index].bol;
+
+
+            $scope.arr2.push($scope.arr[index])
+
+        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+
+
+
+</script>
